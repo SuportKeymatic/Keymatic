@@ -4,82 +4,171 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Keymatic — README</title>
+
   <style>
     :root{
-      --bg:#0b0f19;
-      --card:#0f172a;
-      --muted:#94a3b8;
-      --text:#e5e7eb;
-      --line:rgba(148,163,184,.22);
-      --accent:#60a5fa;
-      --accent2:#a78bfa;
+      /* Dark theme */
+      --bg: #070a12;
+      --panel: rgba(255,255,255,.04);
+      --card: rgba(255,255,255,.05);
+      --card2: rgba(255,255,255,.035);
+      --text: #e6e8ee;
+      --muted: #a6adbb;
+      --line: rgba(148,163,184,.18);
+
+      --accent: #67e8f9;   /* cyan */
+      --accent2:#a78bfa;   /* violet */
+      --accent3:#60a5fa;   /* blue */
       --ok:#22c55e;
       --warn:#f59e0b;
       --bad:#ef4444;
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
       --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      --radius:16px;
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
+
+      --radius: 18px;
+      --shadow: 0 18px 60px rgba(0,0,0,.55);
+      --shadow2: 0 10px 28px rgba(0,0,0,.35);
     }
-    *{box-sizing:border-box}
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+
     body{
       margin:0;
       font-family:var(--sans);
-      background: radial-gradient(1200px 900px at 15% 0%, rgba(96,165,250,.18), transparent 55%),
-                  radial-gradient(1200px 900px at 85% 10%, rgba(167,139,250,.16), transparent 55%),
-                  var(--bg);
       color:var(--text);
-      line-height:1.55;
+      line-height:1.6;
+      background:
+        radial-gradient(900px 700px at 10% -10%, rgba(103,232,249,.18), transparent 55%),
+        radial-gradient(900px 700px at 90% 0%, rgba(167,139,250,.18), transparent 55%),
+        radial-gradient(1200px 900px at 50% 110%, rgba(96,165,250,.12), transparent 55%),
+        var(--bg);
     }
-    a{color:var(--accent); text-decoration:none}
-    a:hover{text-decoration:underline}
-    .wrap{max-width:980px; margin:0 auto; padding:28px 18px 70px}
+
+    a{ color:var(--accent); text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+
+    .wrap{
+      max-width: 1020px;
+      margin: 0 auto;
+      padding: 28px 18px 80px;
+    }
+
+    /* Top bar / hero */
     .hero{
-      border:1px solid var(--line);
-      background: linear-gradient(180deg, rgba(15,23,42,.86), rgba(15,23,42,.66));
+      border: 1px solid var(--line);
       border-radius: var(--radius);
-      box-shadow: var(--shadow);
       overflow:hidden;
+      box-shadow: var(--shadow);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      position:relative;
     }
-    .hero img{width:100%; display:block}
-    .hero-inner{padding:22px 22px 18px}
-    h1{margin:6px 0 6px; font-size:34px; letter-spacing:-0.02em}
-    .lead{color:var(--muted); font-size:16px; margin:0}
-    .chips{display:flex; flex-wrap:wrap; gap:10px; margin-top:14px}
+    .hero:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      pointer-events:none;
+      background:
+        radial-gradient(600px 260px at 15% 0%, rgba(103,232,249,.22), transparent 60%),
+        radial-gradient(650px 280px at 85% 0%, rgba(167,139,250,.22), transparent 60%);
+      opacity:.95;
+    }
+    .hero-inner{
+      position:relative;
+      padding: 22px 22px 18px;
+      backdrop-filter: blur(8px);
+    }
+
+    h1{
+      margin: 6px 0 6px;
+      font-size: 34px;
+      letter-spacing:-0.02em;
+    }
+    .lead{
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 70ch;
+    }
+
+    .chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:14px;
+    }
     .chip{
-      font-size:12px; padding:7px 10px;
-      border:1px solid var(--line);
+      font-size:12px;
+      padding:7px 10px;
+      border: 1px solid var(--line);
       border-radius:999px;
-      background: rgba(148,163,184,.06);
-      color:#cbd5e1;
+      background: rgba(255,255,255,.04);
+      color:#d6dbe7;
       user-select:none;
+    }
+
+    .badge{
+      display:inline-block;
+      padding:4px 9px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(103,232,249,.08);
+      color:#c7fbff;
+      font-size:12px;
+      margin-left:10px;
+      vertical-align:middle;
     }
 
     /* CTA buttons */
     .cta-row{
-      margin-top:18px;
+      margin-top: 18px;
       display:flex;
       flex-wrap:wrap;
       gap:12px;
       align-items:center;
     }
     .btn{
-      display:inline-block;
-      padding:12px 18px;
-      border-radius:12px;
-      font-weight:800;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 12px 16px;
+      border-radius: 14px;
+      font-weight: 800;
       text-decoration:none;
-      box-shadow:0 10px 25px rgba(0,0,0,.25);
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: var(--shadow2);
+      transition: transform .12s ease, filter .12s ease, box-shadow .12s ease;
+      will-change: transform;
+      user-select:none;
     }
+    .btn:hover{
+      text-decoration:none;
+      transform: translateY(-1px);
+      filter: brightness(1.03);
+      box-shadow: 0 16px 40px rgba(0,0,0,.45);
+    }
+    .btn:active{ transform: translateY(0px) scale(.99); }
+
     .btn-download{
-      background:linear-gradient(135deg,#60a5fa,#a78bfa);
-      color:#020617;
+      background: linear-gradient(135deg, rgba(103,232,249,.95), rgba(167,139,250,.95));
+      color:#040615;
+    }
+    .btn-license{
+      background: linear-gradient(135deg, rgba(34,197,94,.95), rgba(16,185,129,.95));
+      color:#021a12;
     }
     .btn-coffee{
-      background:linear-gradient(135deg,#facc15,#f59e0b);
-      color:#422006;
+      background: linear-gradient(135deg, rgba(250,204,21,.98), rgba(245,158,11,.98));
+      color:#2b1500;
+    }
+    .btn-ghost{
+      background: rgba(255,255,255,.05);
+      color: var(--text);
     }
 
+    /* Layout */
     .grid{
       display:grid;
       grid-template-columns: 1fr;
@@ -87,119 +176,163 @@
       margin-top:18px;
     }
     @media(min-width: 920px){
-      .grid{grid-template-columns: 1fr 1fr}
+      .grid{ grid-template-columns: 1fr 1fr; }
     }
+
+    /* Cards */
     .card{
-      border:1px solid var(--line);
+      border: 1px solid var(--line);
       border-radius: var(--radius);
-      background: rgba(15,23,42,.72);
-      box-shadow: var(--shadow);
-      padding:18px;
+      background: linear-gradient(180deg, var(--card), var(--card2));
+      box-shadow: var(--shadow2);
+      padding: 18px;
+      backdrop-filter: blur(8px);
     }
-    h2{margin:0 0 10px; font-size:22px}
-    h3{margin:18px 0 10px; font-size:16px; color:#dbeafe}
-    ul{margin:10px 0 0 18px; color:#dbeafe}
-    li{margin:6px 0; color:#dbeafe}
-    li span{color:var(--muted)}
-    .muted{color:var(--muted)}
-    .note{
-      border-left:4px solid var(--accent2);
-      padding:10px 12px;
-      background: rgba(167,139,250,.10);
-      border-radius:12px;
-      margin-top:12px;
-      color:#e9d5ff;
+    .card-full{ grid-column: 1 / -1; }
+
+    h2{ margin:0 0 10px; font-size:22px; }
+    h3{ margin:18px 0 10px; font-size:16px; color:#dbeafe; }
+
+    .muted{ color: var(--muted); }
+
+    ul, ol{ margin:10px 0 0 18px; }
+    li{ margin:6px 0; }
+    li span{ color: var(--muted); }
+
+    /* Callouts */
+    .note, .warn, .ok, .error{
+      border-left: 4px solid;
+      padding: 10px 12px;
+      border-radius: 14px;
+      margin-top: 12px;
+      background: rgba(255,255,255,.045);
     }
-    .warn{
-      border-left:4px solid var(--warn);
-      padding:10px 12px;
-      background: rgba(245,158,11,.10);
-      border-radius:12px;
-      margin-top:12px;
-      color:#fde68a;
-    }
-    .ok{
-      border-left:4px solid var(--ok);
-      padding:10px 12px;
-      background: rgba(34,197,94,.10);
-      border-radius:12px;
-      margin-top:12px;
-      color:#bbf7d0;
-    }
-    code, pre{font-family:var(--mono)}
+    .note{ border-left-color: var(--accent2); background: rgba(167,139,250,.10); color:#f2e9ff; }
+    .warn{ border-left-color: var(--warn);   background: rgba(245,158,11,.10); color:#ffe6b0; }
+    .ok{   border-left-color: var(--ok);     background: rgba(34,197,94,.10);  color:#caffdd; }
+    .error{border-left-color: var(--bad);    background: rgba(239,68,68,.10);  color:#ffd2d2; }
+
+    /* Code */
+    code, pre{ font-family: var(--mono); }
     pre{
-      margin:12px 0 0;
-      padding:14px;
-      border-radius:14px;
-      border:1px solid var(--line);
-      background: rgba(2,6,23,.75);
+      margin: 12px 0 0;
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background:
+        linear-gradient(180deg, rgba(2,6,23,.78), rgba(2,6,23,.60));
       overflow:auto;
-      color:#e2e8f0;
-      color:#e2e8f0;
+      color:#e5e7eb;
     }
     .k{
       display:inline-block;
-      font-family:var(--mono);
-      font-size:12px;
-      padding:2px 7px;
-      border-radius:8px;
-      border:1px solid var(--line);
-      background: rgba(148,163,184,.08);
-      color:#e2e8f0;
-      margin:0 2px;
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 2px 7px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      color:#e5e7eb;
+      margin: 0 2px;
     }
+
+    /* Tables */
     table{
       width:100%;
       border-collapse:separate;
       border-spacing:0;
       margin-top:12px;
       overflow:hidden;
-      border-radius:14px;
-      border:1px solid var(--line);
-      background: rgba(2,6,23,.42);
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(2,6,23,.35);
     }
     th, td{
-      padding:10px 12px;
-      border-bottom:1px solid var(--line);
-      vertical-align:top;
-      font-size:14px;
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      vertical-align: top;
+      font-size: 14px;
     }
-    th{color:#dbeafe; text-align:left; background: rgba(148,163,184,.07)}
-    tr:last-child td{border-bottom:none}
+    th{
+      color:#dbeafe;
+      text-align:left;
+      background: rgba(255,255,255,.05);
+    }
+    tr:last-child td{ border-bottom:none; }
 
-    /* image size fix */
+    /* Images */
     .img{
       max-width: 760px;
       margin: 14px auto 0;
-      border:1px solid var(--line);
+      border: 1px solid rgba(255,255,255,.10);
       border-radius: var(--radius);
       overflow:hidden;
-      background: rgba(2,6,23,.40);
+      background: rgba(2,6,23,.35);
     }
     .img img{
       width:100%;
       height:auto;
       display:block;
-      border-radius:12px;
     }
 
-    .toc a{display:block; padding:6px 0; color:#bfdbfe}
-    .footer{
-      margin-top:18px;
-      text-align:center;
-      color:var(--muted);
-      font-size:13px;
-      padding:18px 10px;
+    /* TOC */
+    .toc a{
+      display:block;
+      padding: 6px 0;
+      color:#c7fbff;
+      opacity:.92;
     }
-    .badge{
-      display:inline-block;
-      padding:4px 8px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background: rgba(96,165,250,.10);
-      color:#bfdbfe;
-      font-size:12px;
-      margin-left:8px;
+    .toc a:hover{ opacity:1; }
+
+    /* Price / steps */
+    .price{
+      font-size: 28px;
+      font-weight: 900;
+      color: #4ade80;
+      margin: 12px 0;
+    }
+
+    .steps{
+      counter-reset: step-counter;
+      list-style:none;
+      padding:0;
+      margin:16px 0 0;
+    }
+    .steps li{
+      counter-increment: step-counter;
+      position:relative;
+      padding-left: 44px;
+      margin: 18px 0;
+    }
+    .steps li:before{
+      content: counter(step-counter);
+      position:absolute;
+      left:0;
+      top:0;
+      width:30px;
+      height:30px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(34,197,94,.95), rgba(16,185,129,.95));
+      color:#021a12;
+      font-weight:900;
+      font-size: 14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: 0 10px 25px rgba(0,0,0,.35);
+    }
+
+    /* Footer */
+    .footer{
+      margin-top: 20px;
+      text-align:center;
+      color: var(--muted);
+      font-size: 13px;
+      padding: 18px 10px;
+      border-top: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.02);
+      border-radius: 16px;
     }
   </style>
 </head>
@@ -219,21 +352,26 @@
           <div class="chip">Multi-window</div>
           <div class="chip">Global hotkeys</div>
           <div class="chip">Parallel WAIT</div>
-          <div class="chip">Auto-hide</div>
-          <div class="chip">Side panel</div>
+          <div class="chip">10-min trial</div>
         </div>
 
         <div class="cta-row">
           <a class="btn btn-download"
-             href="https://github.com/SuportKeymatic/Keymatic/releases/tag/V1.4"
-             target="_blank">
-            ⬇ Download Keymatic V1.4
+             href="https://github.com/SuportKeymatic/Keymatic/releases/tag/V2.0"
+             target="_blank" rel="noopener">
+            ⬇ Download Keymatic V2.0
           </a>
 
-          <a class="btn btn-coffee"
-             href="https://buymeacoffee.com/keymatic"
-             target="_blank">
-            ☕ Buy me a coffee
+          <a class="btn btn-license"
+             href="#license-activation"
+             onclick="document.getElementById('license-activation').scrollIntoView({behavior:'smooth'})">
+            🔑 Buy License $15
+          </a>
+
+          <a class="btn btn-ghost"
+             href="#support"
+             onclick="document.getElementById('support').scrollIntoView({behavior:'smooth'})">
+            ☕ Support
           </a>
         </div>
       </div>
@@ -243,6 +381,8 @@
       <div class="card">
         <h2>📋 Table of Contents</h2>
         <div class="toc">
+          <a href="#trial">⏱️ Trial Mode</a>
+          <a href="#license-activation">🔑 License Activation</a>
           <a href="#features">✨ Features</a>
           <a href="#install">📥 Installation</a>
           <a href="#ui">🖥️ UI</a>
@@ -252,9 +392,100 @@
           <a href="#hotkeys">⌨️ Global Hotkeys</a>
           <a href="#windows">🪟 Window Manager</a>
           <a href="#faq">❓ FAQ</a>
-          <a href="#tech">🛠️ Tech</a>
-          <a href="#license">📄 License</a>
+          <a href="#contact">📧 Contact</a>
           <a href="#support">☕ Support</a>
+        </div>
+      </div>
+
+      <div class="card" id="trial">
+        <h2>⏱️ Trial Mode</h2>
+        <p class="muted">
+          Keymatic offers a <strong>10-minute trial</strong> per session.
+          After the trial expires, all features are disabled until you activate a license.
+        </p>
+
+        <div class="warn">
+          <strong>⚠️ Trial Limitations:</strong><br/>
+          • 10 minutes per session<br/>
+          • All features available during trial<br/>
+          • Features lock after trial expires
+        </div>
+
+        <p class="muted" style="margin-top:12px">
+          To unlock unlimited usage, purchase a license for <strong>$15 USD</strong>.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card card-full" id="license-activation">
+        <h2>🔑 License Activation</h2>
+        <div class="price">$15 USD</div>
+        <p class="muted">One-time payment • Lifetime license • License is tied to one computer</p>
+
+        <h3>How to activate:</h3>
+        <ol class="steps">
+          <li>
+            <strong>Run Keymatic</strong><br/>
+            <span class="muted">Launch the application and click on the header (⚡) → "Activate License"</span>
+          </li>
+          <li>
+            <strong>Enter your email and generate request</strong><br/>
+            <span class="muted">
+              Click "💾 Generate Request File" — this creates a <span class="k">.keymatic-request</span> file on your Desktop
+            </span>
+          </li>
+          <li>
+            <strong>Purchase license via Buy Me a Coffee</strong><br/>
+            <a class="btn btn-coffee"
+               href="https://buymeacoffee.com/keymatic"
+               target="_blank" rel="noopener"
+               style="margin: 8px 0; display:inline-flex;">
+              ☕ Buy License — $15
+            </a>
+            <div class="error" style="margin-top:12px">
+              <strong>⚠️ CRITICAL: Use the SAME email</strong><br/>
+              The email you enter in Buy Me a Coffee <strong>MUST match exactly</strong> the email you used in Step 2.<br/>
+              <strong>Mismatched emails = License won't work!</strong>
+            </div>
+          </li>
+          <li>
+            <strong>Send the request file to us</strong><br/>
+            <span class="muted">
+              Email the <span class="k">.keymatic-request</span> file from your Desktop to:
+              <strong><a href="mailto:suportlm001@gmail.com">suportlm001@gmail.com</a></strong><br/>
+              Include your Buy Me a Coffee order confirmation if possible
+            </span>
+          </li>
+          <li>
+            <strong>Receive your license file</strong><br/>
+            <span class="muted">
+              Within 24 hours, you'll receive a <span class="k">.keymatic-license</span> file at the email you provided
+            </span>
+          </li>
+          <li>
+            <strong>Load the license</strong><br/>
+            <span class="muted">
+              In Keymatic, click "Activate License" → "📂 Load License File" → select the received file
+            </span>
+          </li>
+        </ol>
+
+        <div class="ok">
+          <strong>✓ Activation complete!</strong><br/>
+          Your Keymatic is now fully unlocked with unlimited usage.
+        </div>
+
+        <h3 style="margin-top:24px">Important notes:</h3>
+        <ul class="muted">
+          <li><strong>Email must match:</strong> Buy Me a Coffee email = Keymatic email = License delivery email</li>
+          <li><strong>One machine per license:</strong> Each license works on one computer only</li>
+          <li><strong>24h delivery:</strong> Usually within a few hours, max 24h</li>
+          <li><strong>Lifetime license:</strong> One-time payment, no subscriptions</li>
+        </ul>
+
+        <div class="warn" style="margin-top:16px">
+          <strong>Need help?</strong> Contact us at <a href="mailto:suportlm001@gmail.com">suportlm001@gmail.com</a>
         </div>
       </div>
 
@@ -267,8 +498,6 @@
           <li><strong>Configurable delays</strong> <span>— fine-grained timing control</span></li>
           <li><strong>Global hotkeys</strong> <span>— start/stop from anywhere</span></li>
           <li><strong>Minimal UI</strong> <span>— stays discreet on the screen</span></li>
-          <li><strong>Auto-hide</strong> <span>— hides automatically when not in use</span></li>
-          <li><strong>UI settings</strong> <span>— transparency, colors, behavior</span></li>
         </ul>
       </div>
 
@@ -277,10 +506,11 @@
         <ol class="muted">
           <li>
             Download the latest version from
-            <a href="https://github.com/SuportKeymatic/Keymatic/releases/tag/V1.4" target="_blank">GitHub Releases (V1.4)</a>
+            <a href="https://github.com/SuportKeymatic/Keymatic/releases/tag/V2.0" target="_blank" rel="noopener">GitHub Releases (V2.0)</a>
           </li>
           <li>Extract the ZIP to any folder</li>
           <li>Run <span class="k">Keymatic.exe</span></li>
+          <li>Enjoy 10-minute trial or activate full license</li>
         </ol>
 
         <h3>Folder structure</h3>
@@ -288,15 +518,13 @@
 ├── Keymatic.exe
 ├── PMX.dll
 ├── ICSharpCode.AvalonEdit.dll
-└── ICSharpCode.AvalonEdit.xml
-</pre>
+└── ICSharpCode.AvalonEdit.xml</pre>
       </div>
 
       <div class="card" id="ui">
         <h2>🖥️ UI</h2>
         <p class="muted">
-          Keymatic uses a right-side panel with quick actions:
-          <span class="k">⚙ Settings</span> for layout/colors and <span class="k">✕ Close</span> to exit.
+          Keymatic uses a right-side panel with quick actions.
         </p>
 
         <div class="img">
@@ -308,11 +536,22 @@
             <tr><th>Element</th><th>Description</th></tr>
           </thead>
           <tbody>
-            <tr><td><strong>Header (⚡)</strong></td><td>Top area of the panel</td></tr>
+            <tr><td><strong>Header (⚡)</strong></td><td>Click for menu (About, Activate License)</td></tr>
             <tr><td><strong>➕ Add</strong></td><td>Create a new macro button</td></tr>
             <tr><td><strong>Macro Buttons</strong></td><td>Run/stop + drag to capture a window</td></tr>
-            <tr><td><strong>⚙ Settings</strong></td><td>Transparency, auto-hide, colors, etc.</td></tr>
+            <tr><td><strong>− Minimize</strong></td><td>Minimize to system tray</td></tr>
             <tr><td><strong>✕ Close</strong></td><td>Exit the application</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Icon indicators</h3>
+        <table>
+          <thead>
+            <tr><th>Icon</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>🔵 Blue</td><td>Licensed & activated</td></tr>
+            <tr><td>🟡 Yellow</td><td>Trial mode (10 min remaining)</td></tr>
           </tbody>
         </table>
 
@@ -449,7 +688,7 @@ DELAY 1000
 LOOP</pre>
 
         <h3>Example 5: Parallel WAIT</h3>
-        <pre># Main loop: NumPad1 every 50ms
+        <pre># Main loop:  NumPad1 every 50ms
 # Parallel:   NumPad5 every 5 seconds
 
 KEY NumPad1
@@ -539,6 +778,20 @@ LOOP</pre>
       <div class="card" id="faq">
         <h2>❓ FAQ</h2>
 
+        <h3>How do I activate my license?</h3>
+        <p class="muted">Follow the steps in <a href="#license-activation">License Activation</a> above.</p>
+
+        <h3>I lost my license file</h3>
+        <p class="muted">
+          Contact us at <a href="mailto:suportlm001@gmail.com">suportlm001@gmail.com</a>
+          with your Buy Me a Coffee order number and we'll resend it.
+        </p>
+
+        <h3>Can I transfer my license to another computer?</h3>
+        <p class="muted">
+          Licenses are tied to one computer. Contact support for special cases.
+        </p>
+
         <h3>The script is not working on the target window</h3>
         <ol class="muted">
           <li>Make sure the window was captured correctly</li>
@@ -554,13 +807,6 @@ LOOP</pre>
           <li>WAIT runs in parallel with the main loop</li>
           <li>Use a valid time in ms</li>
           <li>Close the block with <span class="k">ENDWAIT</span></li>
-          <li>Avoid nesting WAIT inside REPEAT unless intentional</li>
-        </ul>
-
-        <h3>How do I stop all scripts?</h3>
-        <ul class="muted">
-          <li>Stop each running button</li>
-          <li>Or close Keymatic</li>
         </ul>
 
         <div class="warn">
@@ -569,44 +815,48 @@ LOOP</pre>
         </div>
       </div>
 
-      <div class="card" id="tech">
-        <h2>🛠️ Tech</h2>
-        <ul class="muted">
-          <li>C# / .NET</li>
-          <li>Windows (UI + API)</li>
-        </ul>
-      </div>
-
-      <div class="card" id="license">
-        <h2>📄 License</h2>
+      <div class="card" id="contact">
+        <h2>📧 Contact & Support</h2>
         <p class="muted">
-          This project is licensed under the MIT License. See <a href="LICENSE">LICENSE</a>.
+          GitHub: <a href="https://github.com/SuportKeymatic" target="_blank" rel="noopener">@SuportKeymatic</a><br/>
+          Email: <a href="mailto:suportlm001@gmail.com">suportlm001@gmail.com</a>
         </p>
 
-        <h3>Contact</h3>
+        <h3>License support</h3>
         <p class="muted">
-          GitHub: <a href="https://github.com/SuportKeymatic" target="_blank">@SuportKeymatic</a><br/>
-          Email: <a href="mailto:suportlm001@gmail.com">suportlm001@gmail.com</a>
+          For license issues, email us with:<br/>
+          • Your Buy Me a Coffee order number<br/>
+          • The email used for purchase<br/>
+          • Description of the issue
         </p>
       </div>
 
       <div class="card" id="support">
-        <h2>☕ Support</h2>
+        <h2>☕ Support the Project</h2>
         <p class="muted">
-          If Keymatic helps you, consider supporting the project:
+          Keymatic is developed and maintained by an independent developer.
+          Your support helps keep the project alive!
         </p>
-        <a class="btn btn-coffee" href="https://buymeacoffee.com/keymatic" target="_blank">
+        <div class="price">$15 USD</div>
+        <a class="btn btn-license" href="https://buymeacoffee.com/keymatic" target="_blank" rel="noopener">
+          🔑 Buy License
+        </a>
+        <p class="muted" style="margin-top: 16px">
+          Or support with a coffee donation (any amount appreciated!)
+        </p>
+        <a class="btn btn-coffee" href="https://buymeacoffee.com/keymatic" target="_blank" rel="noopener">
           ☕ Buy me a coffee
         </a>
       </div>
-
     </div>
 
     <div class="footer">
       Made with ❤️ and ⚡ ·
-      <a href="https://buymeacoffee.com/keymatic" target="_blank">Buy me a coffee ☕</a>
+      <a href="#license-activation">Buy License $15</a>
       ·
-      <a href="https://github.com/SuportKeymatic/Keymatic/releases/tag/V1.4" target="_blank">Download V1.4</a>
+      <a href="https://buymeacoffee.com/keymatic" target="_blank" rel="noopener">Support ☕</a>
+      ·
+      <a href="https://github.com/SuportKeymatic/Keymatic/releases/tag/V2.0" target="_blank" rel="noopener">Download V2.0</a>
     </div>
   </div>
 </body>
