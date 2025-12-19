@@ -146,7 +146,17 @@
       overflow:hidden;
       background: rgba(2,6,23,.40);
     }
-    .img img{width:100%; display:block}
+    .img{
+		max-width: 760px;      /* controla o tamanho máximo */
+		margin: 14px auto 0;  /* centraliza */
+	}
+		
+	.img img{
+		width:100%;
+		height:auto;
+		display:block;
+		border-radius:12px;
+	}
     .toc a{display:block; padding:6px 0; color:#bfdbfe}
     .footer{
       margin-top:18px;
@@ -185,6 +195,23 @@
           <div class="chip">Auto-hide</div>
           <div class="chip">Side panel</div>
         </div>
+		<div style="margin-top:18px;">
+		<a href="https://github.com/SuportKeymatic/Keymatic/releases/tag/V1.0"
+			target="_blank"
+			style="
+			display:inline-block;
+			padding:12px 18px;
+			border-radius:12px;
+			background:linear-gradient(135deg,#60a5fa,#a78bfa);
+			color:#020617;
+			font-weight:700;
+			text-decoration:none;
+			box-shadow:0 10px 25px rgba(96,165,250,.35);
+			">
+			⬇ Download Keymatic v1.0.0
+		</a>
+</div>
+
       </div>
     </div>
 
@@ -228,20 +255,16 @@
           <li>Run <span class="k">Keymatic.exe</span></li>
         </ol>
 
-        <div class="warn">
-          <strong>Note:</strong> <span class="k">PMX.dll</span> must be in the same folder as the executable.
-        </div>
-
         <h3>Folder structure</h3>
         <pre>📁 Keymatic/
 ├── Keymatic.exe
 ├── PMX.dll
-├── Data/
-│   ├── settings.json
-│   └── Scripts/
-└── Images/
-    ├── logo.png
-    └── icon.ico</pre>
+├── ICSharpCode.AvalonEdit.dll
+├── ICSharpCode.AvalonEdit.xml
+└── Data/
+	├── settings.json
+	└── Scripts/
+		</pre>
       </div>
 
       <div class="card" id="ui">
@@ -526,7 +549,6 @@ LOOP</pre>
         <ul class="muted">
           <li>C# / .NET</li>
           <li>Windows (UI + API)</li>
-          <li>Native DLL: <span class="k">PMX.dll</span></li>
         </ul>
       </div>
 
